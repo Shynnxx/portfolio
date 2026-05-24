@@ -1,0 +1,121 @@
+---
+const skills = [
+  { category: 'Engines', items: ['Unity', 'Godot'] },
+  { category: 'Languages', items: ['C#', 'GDScript', 'TypeScript'] },
+  { category: 'Specialties', items: ['Procedural Generation', 'Roguelike Design', 'Game Jams', 'Pixel Art'] },
+  { category: 'Tools', items: ['Git', 'Aseprite', 'Blender', 'VS Code'] },
+];
+---
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="about-grid">
+      <div class="bio">
+        <p>
+          I'm Shynnxx, an indie game developer with a passion for building games that are easy to pick up
+          but hard to put down. My focus is on roguelikes, procedural generation, and systems-driven gameplay —
+          the kind of games where every run feels different and every decision matters.
+        </p>
+        <p>
+          I've been making games since my teens, starting with small experiments in Game Maker and eventually
+          moving to Unity and Godot. Outside of game dev, I enjoy contributing to open-source projects,
+          speedrunning, and collecting retro hardware.
+        </p>
+        <p>
+          Whether it's a 48-hour game jam or a longer-term project, I love the entire creative process —
+          from the initial spark of an idea all the way to shipping something players can enjoy.
+        </p>
+      </div>
+
+      <div class="skills">
+        {skills.map((group) => (
+          <div class="skill-group">
+            <h3>{group.category}</h3>
+            <ul>
+              {group.items.map((skill) => (
+                <li>
+                  <span class="dot" aria-hidden="true"></span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #about {
+    background: var(--bg);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .bio p {
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 0.97rem;
+  }
+
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .skill-group h3 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+  }
+
+  .skill-group ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .skill-group li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+</style>
