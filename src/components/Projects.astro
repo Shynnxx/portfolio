@@ -1,7 +1,9 @@
 ---
 interface Project {
+  id: string;
   title: string;
   description: string;
+  details: string;
   tags: string[];
   color: string;
   link: string;
@@ -10,28 +12,37 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: 'roguefactory',
     title: 'RogueFactory',
     description:
-      'A procedurally-generated roguelike factory builder. Automate production lines, survive waves of enemies, and descend deeper into the dungeon. Built in Unity with a custom dungeon generation system.',
-    tags: ['Unity', 'C#', 'Roguelike', 'Procedural Gen'],
+      'Rogue Factory is a run-based action roguelike / factory automation hybrid in which combat and production do not exist as separate layers, but actively drive one another. The core vision is to create a game where the player\'s build identity is shaped not only by abstract upgrade choices, but also by the physical structure of the production network they create during the run.',
+    details:
+      'You build your factory layout as part of each run and then defend it in direct combat. Resource flow, machine placement, and combat choices all affect one another, which creates a different strategic profile every run. The game is currently in early development and I\'m building the core systems and prototyping the first level to explore the design space. Below you can see a prototype building system I added, allowing the player to build conveyor belts from certain locations (i.e. resource nodes) and then snap them to another allowed location.',
+    tags: ['UE5', 'C++', 'Roguelike', 'Automation', 'Personal'],
     color: '#1a2a1a',
-    link: 'https://github.com/Shynnxx/RogueFactory',
-    linkLabel: 'View on GitHub',
+    link: '#',
+    linkLabel: 'In Development',
   },
   {
-    title: 'DungeonCrawl',
+    id: 'td-game-prototype',
+    title: 'TD Game Prototype',
     description:
-      'A classic top-down dungeon crawler with turn-based combat, randomized loot, and permadeath. Features a hand-crafted pixel art style and emergent gameplay through item synergies.',
-    tags: ['Godot', 'GDScript', 'Turn-Based', 'Pixel Art'],
+      'This project was part of my bachelor thesis (Game Development Workflow with AI), where I used AI tools and analyzed/evaluated them to create a prototype level for a simple tower defense game.',
+    details:
+      'Below is a snippet of the prototype level with simple mechanics like "start wave" and "buy upgrades for your tower":',
+    tags: ['UE5', 'C++', 'AI', 'Tower Defense', 'Personal'],
     color: '#1a1a2e',
     link: '#',
-    linkLabel: 'Coming Soon',
+    linkLabel: 'Finished',
   },
   {
-    title: 'Ludum Dare #55 Entry',
+    id: 'predecessor',
+    title: 'Predecessor',
     description:
-      'A 48-hour game jam entry. A minimalist puzzle platformer where you summon echoes of your past movement to solve increasingly complex spatial challenges.',
-    tags: ['Unity', 'C#', 'Game Jam', 'Puzzle'],
+      'Predecessor is a free-to-play third-person MOBA developed by Omeda Studios, available on PC, PlayStation and Xbox. Unlike traditional top-down MOBAs, it puts you directly behind your hero in full 3D. Choose from a diverse roster of heroes, master unique abilities, and compete in 5v5 matches with cross-play support across all platforms.',
+    details:
+      'As a Technical Designer in a small engineering team, I had to wear many hats, shifting my focus across the entire project wherever I was needed most. Here are a couple examples of systems and features I worked on during development:',
+    tags: ['UE 5', 'C++', 'MOBA', 'Third-Person', 'Competitive', 'Professional'],
     color: '#1e1a2e',
     link: '#',
     linkLabel: 'Play on itch.io',
@@ -46,7 +57,7 @@ const projects: Project[] = [
 
     <div class="grid">
       {projects.map((project) => (
-        <article class="card">
+        <article class="card" id={`project-card-${project.id}`}>
           <div class="card-thumb" style={`background: ${project.color};`} aria-hidden="true">
             <span class="card-thumb-label">{project.title}</span>
           </div>
@@ -58,14 +69,81 @@ const projects: Project[] = [
                 <span class="tag">{tag}</span>
               ))}
             </div>
-            <a
-              class="card-link"
-              href={project.link}
-              target={project.link !== '#' ? '_blank' : undefined}
-              rel={project.link !== '#' ? 'noopener' : undefined}
-            >
-              {project.linkLabel ?? 'View Project'} →
-            </a>
+            <a class="card-link" href={`#project-${project.id}`}>View details ↓</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="project-details">
+      {projects.map((project) => (
+        <article class="project-detail" id={`project-${project.id}`}>
+          <h3>{project.title}</h3>
+          <p>{project.details}</p>
+          {project.id === 'roguefactory' && (
+            <div class="video-embed">
+              <video autoplay loop muted playsinline>
+                <source src="/portfolio/RogueFactory.mp4" type="video/mp4" />
+              </video>
+            </div>
+          )}
+          {project.id === 'td-game-prototype' && (
+            <div class="video-embed">
+              <video autoplay loop muted playsinline>
+                <source src="/portfolio/TDGameSnippet.mp4" type="video/mp4" />
+              </video>
+            </div>
+          )}
+          {project.id === 'predecessor' && (
+            <>
+              <h4 class="detail-subtitle">Brawl</h4>
+              <p class="detail-subtitle-text">
+                Predecessor's first new game mode, where I owned the gameplay side of development,
+                implementing core systems like the points system, adjusting monsters and minions and
+                creating C++/Blueprint functions to adjust heroes and items specifically for the game mode:
+              </p>
+              <div class="video-embed">
+                <iframe
+                  src="https://www.youtube.com/embed/cAQCGO2-Dm4?si=yW0u4ICGKoGtnI_F"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <h4 class="detail-subtitle">Teleporters</h4>
+              <p class="detail-subtitle-text">
+                I implemented a way for heroes to traverse the map quickly in a cinematic way.
+              </p>
+              <div class="video-embed">
+                <iframe
+                  src="https://www.youtube.com/embed/EUOFU92W2wU?si=Bi3WksX9H43H1gIb&start=2693"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <h4 class="detail-subtitle">Augments</h4>
+              <p class="detail-subtitle-text">
+                Augments altered every single hero in the game significantly. I created the framework for
+                them to work as well as implementing and designing many of them.
+              </p>
+              <div class="video-embed">
+              <iframe
+                width="560" height="315" src="https://www.youtube.com/embed/EEC1OfU_4_s?si=L6YqCa3S02O_hJlv" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+              </div>
+            </>
+          )}
+          <div class="detail-actions">
+            <a class="card-link" href="#projects">Back to projects ↑</a>
           </div>
         </article>
       ))}
@@ -95,8 +173,8 @@ const projects: Project[] = [
   }
   .card:hover {
     transform: translateY(-4px);
-    border-color: rgba(0, 229, 255, 0.3);
-    box-shadow: 0 12px 40px rgba(0, 229, 255, 0.05);
+    border-color: rgba(243, 194, 7, 0.3);
+    box-shadow: 0 12px 40px rgba(243, 194, 7, 0.07);
   }
 
   .card-thumb {
@@ -158,8 +236,8 @@ const projects: Project[] = [
   }
 
   .tag {
-    background: rgba(0, 229, 255, 0.08);
-    border: 1px solid rgba(0, 229, 255, 0.15);
+    background: rgba(243, 194, 7, 0.1);
+    border: 1px solid rgba(243, 194, 7, 0.2);
     color: var(--accent);
     font-size: 0.72rem;
     font-weight: 600;
@@ -180,5 +258,73 @@ const projects: Project[] = [
   .card-link:hover {
     text-decoration: none;
     color: var(--accent-dim);
+  }
+
+  .project-details {
+    margin-top: 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-detail {
+    scroll-margin-top: 6rem;
+    background: rgba(22, 27, 36, 0.7);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 1.5);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-detail h3 {
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .project-detail p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .detail-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .detail-subtitle-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .video-embed {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+
+  .video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .video-embed video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .detail-actions {
+    margin-top: 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 </style>
